@@ -1,1 +1,3 @@
-# cLDM_project
+# Controllable latent diffusion model to evaluate the performance of cardiac segmentation methods
+
+Code will be available soon ...
