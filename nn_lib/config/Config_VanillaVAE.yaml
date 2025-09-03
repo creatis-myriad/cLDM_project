@@ -1,0 +1,33 @@
+working_dir: "/home/deleat/Documents/RomainD/Working_space/"
+nn_dir: ${working_dir}NN_models/
+
+path:
+    input_path: ${working_dir}Data/Data_LLDM_project/MYOSAIQ/2.-Formated_data/Formated_LGE_processed_128128/
+
+    output_path: ${nn_dir}training_Pytorch/training_VAE/training_LgeMyosaiq_v2/${now:%Y-%m-%d} ${now:%H:%M:%S}
+
+
+
+defaults:
+  - _self_
+  - architecture: VanillaVAE_arch
+  - datamodule: LgeMyosaiq_v2_Datamodule
+  - dataset: LgeMyosaiq_v2_Dataset
+  - model: VanillaVAE
+  - processing: processing_LgeMyosaiq_v2
+
+
+
+hydra:
+  run:
+    dir: ${path.output_path}
+  
+  sweep:
+    dir: ${path.output_path}
+    subdir: ${hydra.job.num}
+
+  output_subdir: hydra_config
+
+  verbose: [__main__, info]
+  
+

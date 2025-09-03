@@ -1,0 +1,6 @@
+_target_: nn_lib.models._Architecture.decoder.Decoder_LgeFormated
+in_shape: ${model.net.shape_data}
+in_channel: 128
+lat_dims: ${model.net.lat_dims}
+kernel: [3,3]
+scale_shape: 2

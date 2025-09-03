@@ -1,0 +1,3 @@
+defaults:
+  - autoencoders/autoencoderKL@autoencoders.autoencoderKL
+  - autoencoders/patchDiscriminator@autoencoders.patchDiscriminator

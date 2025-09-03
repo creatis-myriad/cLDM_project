@@ -1,0 +1,8 @@
+_target_: nn_lib.models._Architecture.AutoencoderKL_monai.AutoencoderKL
+spatial_dims: 2
+in_channels: 1
+out_channels: 1
+num_res_blocks: 2
+latent_channels: ${model.net.lat_dims}
+num_channels: [128, 256, 384]
+attention_levels: [False, False, True]

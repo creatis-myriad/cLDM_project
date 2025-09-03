@@ -1,0 +1,6 @@
+_target_: nn_lib.common.funDataset.CompressLgeSeg_CNCond_Dataset
+paths: ${path.input_path}
+compress_data_mu: null
+compress_data_sig: null
+compress_segm_mu: null
+processing: ${processing}

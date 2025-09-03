@@ -1,0 +1,28 @@
+net:
+  shape_data: [1,128,128]
+  lat_dims: 1
+  lr_g: 2e-4
+  lr_d: 8e-4
+  alpha: 1
+  beta: 1e-6
+
+  adv_weight: 0.01
+  perceptual_weight: 0.001
+ 
+device: cuda
+seed: 42
+
+train_params:
+  callback:
+    monitor: val_
+    min_delta: 1e-6
+    patience: 50
+
+  batch_size: 32
+  num_workers: 11
+  persistent_workers: True
+  split_test: 0.1
+  split_val: 0.05
+  shuffle: True
+  min_epoch: 1
+  max_epoch: 2

@@ -1,0 +1,24 @@
+net:
+  lr: 2e-5
+  num_timesteps: 1000
+  scheduler: linear_beta
+  scale_factor: 1.0
+
+path_model_autoencoder: ${nn_dir}training_Pytorch/training_AE_KL/training_LgeMyoSeg_v2/2024-12-05 11:44:11_base/
+path_model_cond: ${nn_dir}training_Pytorch/training_ARVAE/training_LgeMyosaiq_v2/2025-01-16 11:38:50_196e_ld_64_img
+
+device: cuda
+seed: 42
+
+train_params:
+  callback:
+    monitor: train_loss
+
+  batch_size: 32
+  num_workers: 11
+  persistent_workers: True
+  split_test: 0.1
+  split_val: 0.05
+  shuffle: True
+  min_epoch: 1
+  max_epoch: 1

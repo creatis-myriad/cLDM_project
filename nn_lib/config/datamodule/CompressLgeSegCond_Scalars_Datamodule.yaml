@@ -1,0 +1,21 @@
+_target_: nn_lib.common.funDatamodule.CompressLgeSegCond_Scalars_Datamodule
+paths: ${path.input_path}
+name_files: ["dcm.pkl", "roi.pkl"]
+path_compress_data: null
+keys_cond_data: ["z_vals"]
+nb_compress_train: 3163
+nb_compress_val: 139
+nb_cond_train: 284
+nb_cond_val: 11
+cfg: null
+batch_size: ${model.train_params.batch_size}
+num_workers: ${model.train_params.num_workers}
+persistent_workers: ${model.train_params.persistent_workers}
+split_test: ${model.train_params.split_test}
+split_val: ${model.train_params.split_val}
+shuffle: ${model.train_params.shuffle}
+
+
+
+
+

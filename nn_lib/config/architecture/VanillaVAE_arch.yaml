@@ -1,0 +1,5 @@
+defaults:
+  - encoders: enc_LgeFormated
+  - decoders: dec_LgeFormated
+
+  

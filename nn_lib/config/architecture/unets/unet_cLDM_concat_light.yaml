@@ -1,0 +1,9 @@
+_target_: nn_lib.models._Architecture.unet_DDPM_monai.DiffusionModelUNet
+spatial_dims: 2
+in_channels: 2
+out_channels: 1
+num_res_blocks: 1
+num_channels: [32, 64]
+attention_levels: [False, True]
+num_head_channels: [0, 64]
+

@@ -1,0 +1,15 @@
+_target_: nn_lib.common.funDatamodule.LgeMyosaiq_v2_Datamodule
+paths: ${path.input_path}
+name_files: ["dcm.pkl", "roi.pkl"]
+cfg: null
+batch_size: ${model.train_params.batch_size}
+num_workers: ${model.train_params.num_workers}
+persistent_workers: ${model.train_params.persistent_workers}
+split_test: ${model.train_params.split_test}
+split_val: ${model.train_params.split_val}
+shuffle: ${model.train_params.shuffle}
+
+
+
+
+

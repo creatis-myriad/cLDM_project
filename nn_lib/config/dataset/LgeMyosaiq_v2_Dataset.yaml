@@ -1,0 +1,4 @@
+_target_: nn_lib.common.funDataset.LgeMyosaiq_v2_Dataset
+paths: ${path.input_path}
+work_on: dcm.pkl
+processing: ${processing}

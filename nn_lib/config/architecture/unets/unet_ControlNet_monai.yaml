@@ -1,0 +1,10 @@
+_target_: nn_lib.models._Architecture.controlnet_monai.ControlNet
+spatial_dims: 2
+in_channels: 1
+num_res_blocks: 1
+num_channels: [32, 64]
+attention_levels: [False, True]
+num_head_channels: [0, 64]
+conditioning_embedding_num_channels: [16,32,64]
+
+

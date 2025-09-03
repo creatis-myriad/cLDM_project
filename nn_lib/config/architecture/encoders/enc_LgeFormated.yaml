@@ -1,0 +1,6 @@
+_target_: nn_lib.models._Architecture.encoder.Encoder_LgeFormated
+in_shape: ${model.net.shape_data}
+in_channel: 1
+lat_dims: ${model.net.lat_dims}
+kernel: [3,3]
+pooling_shape: 2
