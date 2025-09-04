@@ -1,6 +1,10 @@
 # Controllable latent diffusion model to evaluate the performance of cardiac segmentation methods
 
 
+![Pipeline overview](./figures/fig1_pipeline.png "Figure 1. Pipeline overview")
+
+<!-- Figure 1. Overview of the pipeline used in the experiments. -->
+
 
 ## Prerequisites
 - Python 3.10+
@@ -48,9 +52,8 @@ Below are the command lines to run the models:
 - **VanillaVAE**
 
     ```bash
-    # For Images
-    python nn_models/bin/train_VanillaVAE.py \
-        +config_name=JobConfig_VAE.yaml \
+    python train_VanillaVAE.py \
+        +config_name=Config_VanillaVAE.yaml \
         model.train_params.num_workers=24 \
         model.train_params.batch_size=32 \
         model.train_params.max_epoch=500 \
@@ -60,18 +63,121 @@ Below are the command lines to run the models:
         model.net.beta=8e-3
     ```
 
-- **test**
+- **ARVAE**
+
+    ```bash
+    python train_ARVAE.py \
+        +config_name=Config_ARVAE.yaml \
+        \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=500 \
+        model.net.shape_data=[1,128,128] \
+        model.net.lat_dims=8 \
+        model.net.alpha=5 \
+        model.net.beta=8e-3 \
+        model.net.gamma=3 \
+        \
+        +model.net.keys_cond_data=["z_vals","transmurality","endo_surface_length","infarct_size_2D"] \
+    ```
+
+- **AE_KL**
+
+    ```bash
+    python train_AE_KL.py \
+        +config_name=ConfigAE_KL.yaml \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=1000 \
+        model.net.lat_dims=1 \
+    ```
+
+- **cLDM**
+
+    ```bash
+    # Conditioning with Scalars
+    python train_cLDM.py \
+        +config_name=Config_cLDM.yaml \
+        \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=5100 \
+        model.path_model_cond=null \
+        \
+        processing=processing_CompressLgeSegCond_Scalars \
+        dataset=CompressLgeSegCond_Scalars_Dataset \
+        datamodule=CompressLgeSegCond_Scalars_Datamodule \
+        datamodule.keys_cond_data=["z_vals","transmurality","endo_surface_length","infarct_size_2D"] \
+        \
+        architecture/unets=unet_cLDM_light \
+
+    ```
+
+    ```bash
+    # Conditioning with latent representation from VAE 
+    python train_cLDM.py \
+        +config_name=Config_cLDM.yaml \
+        \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=5100 \
+        model.path_model_cond="/home/deleat/Documents/RomainD/Working_space/NN_models/training_Pytorch/training_VAE/training_LgeMyosaiq_v2/2025-01-06 10:13:45_106e_img_base" \
+        \
+        architecture/unets=unet_cLDM_light \
+
+    ```
+
+    ```bash
+    # Conditioning with latent representation from ARVAE
+    python nn_models/bin/train_cLDM.py \
+        +config_name=Config_cLDM.yaml \
+        \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=5100 \
+        model.path_model_cond="/home/deleat/Documents/RomainD/Working_space/NN_models/training_Pytorch/training_ARVAE/training_LgeMyosaiq_v2/2025-01-06 14:23:29_72e_img_base" \
+        \
+        architecture/unets=unet_cLDM_light \
+    ```
+
+- **LDM**
+
+    ```bash
+    python train_LDM.py \
+        +config_name=Config_LDM.yaml \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=5100 \
+        architecture/unets=unet_LDM_light \
+    ```
+
+- **ControlNet**
+
+    ```bash
+    python train_ControlNet.py \
+        +config_name=Config_ControlNet.yaml \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=5100 \
+    ```
+
+- **cLDM_concat**
+
+    ```bash
+    python train_cLDM_concat.py \
+        +config_name=Config_cLDM_concat.yaml \
+        model.train_params.num_workers=24 \
+        model.train_params.batch_size=32 \
+        model.train_params.max_epoch=5100 \
+        \
+        architecture/unets=unet_cLDM_concat_light \
+    ```
 
 
-
-## Figure
-TODO
-<!-- 
-File fig_ ... was the one use to create fig 2 and 3 in the article.
- -->
-
-
-
+## Figures from the paper
+- Figure 2 and 3 where obtained using the file `fig_originalSeg_vs_generatedSeg.py`. It needs the original segmentation as well as the segmentation derived from the nnU-Net model with synthetic images serving as the input.
+- To get **Figure 2**, we have chosen an arbitrary mask to illustrate our pipeline.
+- To get **Figure 3**, we have selected specific masks with relevant characteristics. Therefore, synthetic images were generated and conditioned with those masks, as illustrated in the figure. For the final row, a manual rotation of 90°, 180° and 270° were applied to the mask.
 
 
 
