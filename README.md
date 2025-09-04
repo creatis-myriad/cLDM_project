@@ -46,7 +46,13 @@
 - For strategy 3, the `cLDM_concat` model is used using 2D representation of segmentation masks obtained from the `AE_KL` model.
 
 
+## Figures from the paper
+- Figure 2 and 3 where obtained using the file `fig_originalSeg_vs_generatedSeg.py`. It needs the original segmentation as well as the segmentation derived from the nnU-Net model with synthetic images serving as the input.
+- To get **Figure 2**, we have chosen an arbitrary mask to illustrate our pipeline.
+
 ![Pipeline overview](./figures/Dice_segGen_v2.png "Figure 2.")
+
+- To get **Figure 3**, we have selected specific masks with relevant characteristics. Therefore, synthetic images were generated and conditioned with those masks, as illustrated in the figure. For the final row, a manual rotation of 90°, 180° and 270° were applied to the mask.
 
 ![Pipeline overview](./figures/qualitative_result_v4.png "Figure 3.")
 
@@ -176,13 +182,6 @@ Below are the command lines to run the models:
         \
         architecture/unets=unet_cLDM_concat_light \
     ```
-
-
-## Figures from the paper
-- Figure 2 and 3 where obtained using the file `fig_originalSeg_vs_generatedSeg.py`. It needs the original segmentation as well as the segmentation derived from the nnU-Net model with synthetic images serving as the input.
-- To get **Figure 2**, we have chosen an arbitrary mask to illustrate our pipeline.
-- To get **Figure 3**, we have selected specific masks with relevant characteristics. Therefore, synthetic images were generated and conditioned with those masks, as illustrated in the figure. For the final row, a manual rotation of 90°, 180° and 270° were applied to the mask.
-
 
 
 
