@@ -44,23 +44,23 @@
 
 
 ## How to run
-Below are the command line to run the models:
-    - **VanillaVAE**
-        ```    
-        # For Images
-        python nn_models/bin/train_VanillaVAE.py \
+Below are the command lines to run the models:
+- **VanillaVAE**
+
+    ```bash
+    # For Images
+    python nn_models/bin/train_VanillaVAE.py \
         +config_name=JobConfig_VAE.yaml \
-        \
         model.train_params.num_workers=24 \
         model.train_params.batch_size=32 \
         model.train_params.max_epoch=500 \
         model.net.shape_data=[1,128,128] \
         model.net.lat_dims=8 \
         model.net.alpha=5 \
-        model.net.beta=8e-3 \
-        ```
-    - **test** 
+        model.net.beta=8e-3
+    ```
 
+- **test**
 
 
 
