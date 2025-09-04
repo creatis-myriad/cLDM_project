@@ -1,9 +1,8 @@
 # Controllable latent diffusion model to evaluate the performance of cardiac segmentation methods
 
 
-![Pipeline overview](./figures/fig1_pipeline.png "Figure 1. Pipeline overview")
+![Pipeline overview](./figures/fig1_pipeline.png "Figure 1.")
 
-<!-- Figure 1. Overview of the pipeline used in the experiments. -->
 
 
 ## Prerequisites
@@ -45,6 +44,11 @@
     - The latent representation from `ARVAE` of the images and regularized with clinical attributes (strategy 1.3)
 - For strategy 2, the `ControlNet` model is used using the `LDM` model.
 - For strategy 3, the `cLDM_concat` model is used using 2D representation of segmentation masks obtained from the `AE_KL` model.
+
+
+![Pipeline overview](./figures/Dice_segGen_v2.png "Figure 2.")
+
+![Pipeline overview](./figures/qualitative_result_v4.png "Figure 3.")
 
 
 ## How to run
