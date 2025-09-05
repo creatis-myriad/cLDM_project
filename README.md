@@ -16,14 +16,14 @@
 
 
 ## Create the Conda environment
-- Create from the provided environment file:
+- Create a conda environment from the provided file:
     - conda env create -f environment.yml
 - Activate it:
     - conda activate cLDM_env
 
 
 ## Data preparation
-- Data from MYOSAIQ challenge were put in one folder and divided by patients.
+- Data come from the [MYOSAIQ challenge](https://www.creatis.insa-lyon.fr/Challenge/myosaiq/) and were put in one folder and divided by patients.
 - The D8 subset was not used during training.
 - In the code, `D_metrics` is a dictionnary with specific informations (like the metrics) obtained from the MYOSAIQ database.
 
@@ -32,22 +32,23 @@
 - Configurations files that were used to run the experiments can be found in the folder `nn_lib/config/`. It is configurated as follow:
     - `Config_VanillaVAE.yaml` is the main config file that will use other configuration files to run the VAE model.
     - The folder `config/model` contains the configuration files with the parameters for the each model.
-    - The folder `config/architecture` contains the configuration files to select specific architecture depending and the model you want to run.
-    - The folders `config/dataset` and `config/datamodule` contain the configuration files to create the dataloaders for the training of the model.
+    - The folder `config/architecture` contains the configuration files to select specific architecture depending on the model you want to run.
+    - The folder `config/processing` has the path to load a dictionnary containing the metrics of all patients for all slices.
+    - The folders `config/dataset` and `config/datamodule` contain the configuration files to create the dataloaders and use them to train the model.
 - When running a main configuration, the sub-configuration files used should have the same name.
 
 
 ## Models used for the experiments
-- For strategy 1, the `cLDM` model is used. The conditioning (using cross-attention) was done with:
-    - A vector of scalars derived from the segmentations (strategy 1.1).
-    - The latent representation from `VanillaVAE` of the images (strategy 1.2). 
-    - The latent representation from `ARVAE` of the images and regularized with clinical attributes (strategy 1.3)
-- For strategy 2, the `ControlNet` model is used using the `LDM` model.
-- For strategy 3, the `cLDM_concat` model is used using 2D representation of segmentation masks obtained from the `AE_KL` model.
+- For **strategy** 1, the `cLDM` model is used. The conditioning (using cross-attention) was done with:
+    - A vector of scalars (clinical attributes) derived from the segmentations (strategy 1.1).
+    - The latent representation from the `VanillaVAE` model trained on images (strategy 1.2). 
+    - The latent representation from the `ARVAE` model trained on images and regularized with clinical attributes (strategy 1.3)
+- For **strategy 2**, the `ControlNet` architecture is employed with an `LDM` backbone.
+- For **strategy 3**, the `cLDM_concat` architecture is conditioned on 2D representation of segmentation masks obtained with the `AE_KL` model.
 
 
 ## Figures from the paper
-- Figure 2 and 3 where obtained using the file `fig_originalSeg_vs_generatedSeg.py`. It needs the original segmentation as well as the segmentation derived from the nnU-Net model with synthetic images serving as the input.
+- Figure 2 and 3 where obtained using the file `fig_originalSeg_vs_generatedSeg.py`. It needs the original segmentation as well as the segmentation derived from the nnU-Net model with synthetic images used as inputs.
 - To get **Figure 2**, we have chosen an arbitrary mask to illustrate our pipeline.
 
 ![Pipeline overview](./figures/Dice_segGen_v2.png "Figure 2.")
